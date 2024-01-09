@@ -27,21 +27,21 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 32),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(
-                child: Container(),
                 flex: 2,
+                child: Container(),
               ),
               SvgPicture.asset(
                 AppImages.instagramLogo,
                 color: primaryColor,
                 height: 64,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 64,
               ),
               // TextField for email
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   textEditingController: _emailController,
                   textInputType: TextInputType.emailAddress,
                   hintText: 'Enter your email'),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               TextFieldInput(
@@ -57,14 +57,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   textEditingController: _passwordController,
                   textInputType: TextInputType.text,
                   hintText: 'Enter your password'),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
 
               InkWell(
                 onTap: () {},
                 child: Container(
-                  child: const Text('Log in'),
                   width: double.infinity,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 12),
@@ -75,33 +74,34 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       color: blueColor),
+                  child: const Text('Log in'),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Flexible(
-                child: Container(),
                 flex: 2,
+                child: Container(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: const Text("Don't have an account?"),
                     padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: const Text("Don't have an account?"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   GestureDetector(
                     onTap: () {},
                     child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
                         "Sign up",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
                   ),
                 ],
