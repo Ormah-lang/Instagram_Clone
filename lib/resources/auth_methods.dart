@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/sign_up/resources/storage_methods.dart';
+import 'package:instagram_clone/resources/storage_methods.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -42,6 +42,24 @@ class AuthMethods {
     } catch (err) {
       res = err.toString();
       debugPrint('res: $res');
+    }
+    return res;
+  }
+
+  Future<String> loginUser(
+      {required String email, required String password}) async {
+    String res = "Some error occured";
+
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = "Success";
+      } else {
+        res = "Please enter all the fields";
+      }
+    } catch (err) {
+      res = err.toString();
     }
     return res;
   }

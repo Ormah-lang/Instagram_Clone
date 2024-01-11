@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/features/login/widgets/text_field_input.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/images.dart';
+import 'package:instagram_clone/utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -62,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               InkWell(
-                onTap: () {},
+                onTap: () => loginUser(),
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
@@ -74,7 +77,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       color: blueColor),
-                  child: const Text('Log in'),
+                  child: isLoading
+                      ? const CircularProgressIndicator(
+                          color: primaryColor,
+                        )
+                      : const Text('Log in'),
                 ),
               ),
               const SizedBox(
@@ -111,5 +118,22 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void loginUser() async {
+    setState(() {
+      isLoading = true;
+    });
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+
+    if (res == "Success") {
+      print(res);
+    } else {
+      showSnackBar(res, context);
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
 }

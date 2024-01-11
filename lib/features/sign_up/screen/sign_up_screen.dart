@@ -8,7 +8,7 @@ import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/images.dart';
 import 'package:instagram_clone/utils/utils.dart';
 
-import '../resources/auth_methods.dart';
+import '../../../resources/auth_methods.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
