@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/features/login/widgets/text_field_input.dart';
+import 'package:instagram_clone/features/sign_up/screen/sign_up_screen.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/images.dart';
 import 'package:instagram_clone/utils/utils.dart';
+
+import '../../../responsive/mobile_screen_layout.dart';
+import '../../../responsive/responsive_layout_screen.dart';
+import '../../../responsive/web_screen_layout.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -102,7 +107,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 8,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      navigateToSignUp();
+                    },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
@@ -128,12 +135,22 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text, password: _passwordController.text);
 
     if (res == "Success") {
-      print(res);
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+                webScreenLayout: WebScreenLayout(),
+                mobileScreenLayout: MobileScreenLayout(),
+              )));
     } else {
       showSnackBar(res, context);
     }
     setState(() {
       isLoading = false;
     });
+  }
+
+  void navigateToSignUp() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const SignUpScreen(),
+    ));
   }
 }

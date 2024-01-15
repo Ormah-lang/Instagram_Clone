@@ -9,6 +9,10 @@ import 'package:instagram_clone/utils/images.dart';
 import 'package:instagram_clone/utils/utils.dart';
 
 import '../../../resources/auth_methods.dart';
+import '../../../responsive/mobile_screen_layout.dart';
+import '../../../responsive/responsive_layout_screen.dart';
+import '../../../responsive/web_screen_layout.dart';
+import '../../login/screen/login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -157,7 +161,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     width: 8,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      navigateToLogin();
+                    },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
@@ -186,11 +192,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
         bio: _bioController.text,
         file: _image!);
 
-    if (res != 'success') {
-      showSnackBar(res, context);
-    }
     setState(() {
       _isLoading = false;
     });
+
+    if (res != 'success') {
+      showSnackBar(res, context);
+    } else {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+                webScreenLayout: WebScreenLayout(),
+                mobileScreenLayout: MobileScreenLayout(),
+              )));
+    }
+  }
+
+  void navigateToLogin() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const LoginScreen(),
+    ));
   }
 }
